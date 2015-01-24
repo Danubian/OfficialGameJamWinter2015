@@ -14,7 +14,7 @@ public class PickupController : MonoBehaviour {
 	public string currentState = NOTHING_STATE;
 	// Use this for initialization
 	void Start () {
-		int chosenState = Random.Range(0, 3);
+		int chosenState = Random.Range(1, 3);
 		switch(chosenState)
 		{
 		case 0:

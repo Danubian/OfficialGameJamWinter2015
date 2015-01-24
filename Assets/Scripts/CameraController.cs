@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		timeLeft = GlobalVar.Instance.MAX_PLAY_TIME;
 	}
 	
 	// Update is called once per frame
@@ -18,8 +19,6 @@ public class CameraController : MonoBehaviour {
 		GUI.Box (new Rect (0, 0, 150, 25), "Player 1 Score: " + GlobalVar.Instance.PLAYER_SCORE_1);
 		GUI.Box (new Rect (Screen.width - 150, 0, 150, 25), "Player 2 Score: " + GlobalVar.Instance.PLAYER_SCORE_2);
 
-		
-		timeLeft = 90f;
 		if (timeLeft > 0) 
 		{
 			timeLeft = (GlobalVar.Instance.MAX_PLAY_TIME - (int)(Time.timeSinceLevelLoad * 10) / 10f);
