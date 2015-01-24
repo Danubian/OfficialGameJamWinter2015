@@ -15,9 +15,12 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 velocity = Vector3.zero;
 	private Vector3 displacement;
 
+	private Transform playerMesh;
+
 	// Use this for initialization
 	void Start () {
 		other = otherPlayer.GetComponent<PlayerController> ();
+		playerMesh = this.transform.GetChild (0);
 	}
 	
 	// Update is called once per frame
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 		velocity = new Vector3 (speedX, 0f, speedY);
 
 		if (!isInRange ()) {
+			Debug.Log("Ding!");
 			if((displacement.x > 0 || speedX > 0) ||
 			   (displacement.x < 0 || speedX < 0))
 			{
@@ -54,6 +58,11 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		float rotation = Vector3.Angle (new Vector3(1, 0, 0), new Vector3 (speedX, 0, speedY));
+		if(speedY > 0)
+			rotation *= -1;
+
+		playerMesh.eulerAngles = new Vector3 (0, rotation, 0);
 		this.transform.Translate (speedX, 0f, speedY);
 	}
 

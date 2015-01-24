@@ -15,7 +15,6 @@ public class PickupController : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		Debug.Log (other.name);
-		CameraController cc = GameObject.Find ("Main Camera").GetComponent<CameraController> ();
 
 		if(other.name.Equals("Player1"))
 			GlobalVar.Instance.PLAYER_SCORE_1 += value;

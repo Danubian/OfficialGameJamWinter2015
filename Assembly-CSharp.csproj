@@ -46,12 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GlobalVarsController.cs" />
-     <Compile Include="Assets\PickupController.cs" />
      <Compile Include="Assets\Scripts\AreaController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Center.cs" />
      <Compile Include="Assets\Scripts\GlobalVar.cs" />
+     <Compile Include="Assets\Scripts\GlobalVarsController.cs" />
+     <Compile Include="Assets\Scripts\PickupController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Singleton.cs" />
      <Compile Include="Assets\Scripts\StartCamera.cs" />

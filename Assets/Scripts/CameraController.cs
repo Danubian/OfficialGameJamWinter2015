@@ -4,11 +4,9 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
 	private float timeLeft;
-	private int counter = 0;
 
 	// Use this for initialization
 	void Start () {
-		timeLeft = GlobalVar.Instance.MAX_TIME;
 	}
 	
 	// Update is called once per frame
@@ -20,9 +18,14 @@ public class CameraController : MonoBehaviour {
 		GUI.Box (new Rect (0, 0, 150, 25), "Player 1 Score: " + GlobalVar.Instance.PLAYER_SCORE_1);
 		GUI.Box (new Rect (Screen.width - 150, 0, 150, 25), "Player 2 Score: " + GlobalVar.Instance.PLAYER_SCORE_2);
 
-
-		if (timeLeft > 0)
-			timeLeft = (GlobalVar.Instance.MAX_TIME - (int)(Time.timeSinceLevelLoad * 10) / 10f);
+		
+		timeLeft = 90f;
+		if (timeLeft > 0) 
+		{
+			Debug.Log (timeLeft);
+			timeLeft = (GlobalVar.Instance.MAX_PLAY_TIME - (int)(Time.timeSinceLevelLoad * 10) / 10f);
+			Debug.Log (GlobalVar.Instance.MAX_PLAY_TIME);
+		}
 		else
 			Application.LoadLevel (2);
 
