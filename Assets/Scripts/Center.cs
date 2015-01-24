@@ -15,6 +15,6 @@ public class Center : MonoBehaviour {
 	void Update () {
 		distance = Vector3.Distance (player1.transform.position, player2.transform.position);
 		normal = (player1.transform.position + player2.transform.position) / 2;
-		this.transform.position = normal;
+		this.transform.position = new Vector3(30, 1, normal.z);
 	}
 }

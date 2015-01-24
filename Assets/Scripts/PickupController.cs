@@ -31,8 +31,6 @@ public class PickupController : MonoBehaviour {
 
 		glowCube = this.transform.FindChild ("GlowCube");
 		glowCube.renderer.material = materials [chosenState];
-
-
 	}
 
 	void OnTriggerEnter (Collider other) {
@@ -42,20 +40,22 @@ public class PickupController : MonoBehaviour {
 		{
 			Debug.Log("Fox Ding!");
 			GlobalVar.Instance.PLAYER_SCORE_1 += value;
+			other.transform.GetComponent<PlayerController>().playPickupSound();
 			Destroy(this.gameObject);
 		}
 		else if (other.name.Equals("Flamingo") && currentState == FLAMINGO_STATE)
 		{
 			Debug.Log("Flamingo Ding!");
 			GlobalVar.Instance.PLAYER_SCORE_2 += value;
+			other.transform.GetComponent<PlayerController>().playPickupSound();
 			Destroy(this.gameObject);
 		}
 
 		if(GlobalVar.Instance.PLAYER_SCORE_1 == GlobalVar.Instance.MAX_PICKUPS*value || 
 		   GlobalVar.Instance.PLAYER_SCORE_2 == GlobalVar.Instance.MAX_PICKUPS*value)
 		{
+			GlobalVar.Instance.WINNER = other.name;
 			Application.LoadLevel(2);
 		}
-
 	}
 }

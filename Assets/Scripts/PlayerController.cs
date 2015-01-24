@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour {
 
 	public GameObject otherPlayer;
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour {
 	public string backward;
 	public string left;
 	public string right;
+
+	public AudioClip[] sounds;
+	public AudioClip[] carts;
 
 
 	private Vector3 velocity = Vector3.zero;
@@ -65,14 +69,15 @@ public class PlayerController : MonoBehaviour {
 				rotation *= -1;
 
 			playerMesh.eulerAngles = Vector3.Lerp(playerMesh.eulerAngles, new Vector3(0, rotation, 0), GlobalVar.Instance.PLAYER_ROTATE_SMOOTH * Time.deltaTime);
-				
 
-			lastRotation = rotation;
+			Vector3 displacement = new Vector3(speedX, 0f, speedY);
+			if(rotation != lastRotation)
+			{
+				lastRotation = rotation;
+			}
 
-			this.transform.Translate(speedX, 0f, speedY);
+			this.transform.Translate(displacement);
 		}
-
-
 	}
 
 	public float getSpeedX()
@@ -104,5 +109,11 @@ public class PlayerController : MonoBehaviour {
 			result -= GlobalVar.Instance.PLAYER_SPEED;
 		}
 		return result;
+	}
+
+	public void playPickupSound()
+	{
+		int num = Random.Range (0, sounds.Length);
+		audio.PlayOneShot(sounds[num]);
 	}
 }
