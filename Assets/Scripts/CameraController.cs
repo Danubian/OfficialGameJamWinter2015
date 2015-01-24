@@ -22,9 +22,7 @@ public class CameraController : MonoBehaviour {
 		timeLeft = 90f;
 		if (timeLeft > 0) 
 		{
-			Debug.Log (timeLeft);
 			timeLeft = (GlobalVar.Instance.MAX_PLAY_TIME - (int)(Time.timeSinceLevelLoad * 10) / 10f);
-			Debug.Log (GlobalVar.Instance.MAX_PLAY_TIME);
 		}
 		else
 			Application.LoadLevel (2);

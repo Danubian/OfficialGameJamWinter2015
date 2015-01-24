@@ -36,15 +36,16 @@ public class PlayerController : MonoBehaviour {
 		return distance < GlobalVar.Instance.MAX_DIST;
 	}
 
+	private float lastRotation;
 	public void move()
 	{
-		float speedX = getSpeedX();
-		float speedY = getSpeedY();
+		float speedX = getSpeedX()*Time.deltaTime;
+		float speedY = getSpeedY()*Time.deltaTime;
 
 		velocity = new Vector3 (speedX, 0f, speedY);
 
 		if (!isInRange ()) {
-			Debug.Log("Ding!");
+			Debug.Log("Range Ding!");
 			if((displacement.x > 0 || speedX > 0) ||
 			   (displacement.x < 0 || speedX < 0))
 			{
@@ -57,13 +58,21 @@ public class PlayerController : MonoBehaviour {
 				speedY = 0;
 			}
 		}
+		if(speedX != 0 || speedY != 0)
+		{
+			float rotation = Vector3.Angle (new Vector3(1, 0, 0), new Vector3 (speedX, 0, speedY));
+			if(speedY > 0)
+				rotation *= -1;
 
-		float rotation = Vector3.Angle (new Vector3(1, 0, 0), new Vector3 (speedX, 0, speedY));
-		if(speedY > 0)
-			rotation *= -1;
+			playerMesh.eulerAngles = Vector3.Lerp(playerMesh.eulerAngles, new Vector3(0, rotation, 0), GlobalVar.Instance.PLAYER_ROTATE_SMOOTH * Time.deltaTime);
+				
 
-		playerMesh.eulerAngles = new Vector3 (0, rotation, 0);
-		this.transform.Translate (speedX, 0f, speedY);
+			lastRotation = rotation;
+
+			this.transform.Translate(speedX, 0f, speedY);
+		}
+
+
 	}
 
 	public float getSpeedX()
