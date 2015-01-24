@@ -5,14 +5,13 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject otherPlayer;
 	private PlayerController other;
-	private float speed = .2f;
 	
 	public string forward;
 	public string backward;
 	public string left;
 	public string right;
 
-	private const float MAX_DIST = 20f;
+
 	private Vector3 velocity = Vector3.zero;
 	private Vector3 displacement;
 
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 pos2 = other.transform.position + other.velocity;
 		displacement = pos1 - pos2;
 		float distance = displacement.magnitude;
-		return distance < MAX_DIST;
+		return distance < GlobalVar.Instance.MAX_DIST;
 	}
 
 	public void move()
@@ -61,14 +60,15 @@ public class PlayerController : MonoBehaviour {
 	public float getSpeedX()
 	{
 		float result = 0f;
+
 		if(Input.GetKey (forward)) 
 		{
-			result += speed;
+			result += GlobalVar.Instance.PLAYER_SPEED;
 		}
 
 		if (Input.GetKey (backward)) 
 		{
-			result -= speed;
+			result -= GlobalVar.Instance.PLAYER_SPEED;
 		}
 		return result;
 	}
@@ -78,12 +78,12 @@ public class PlayerController : MonoBehaviour {
 		float result = 0f;
 		if(Input.GetKey (left)) 
 		{
-			result += speed;
+			result += GlobalVar.Instance.PLAYER_SPEED;
 		}
 		
 		if (Input.GetKey (right)) 
 		{
-			result -= speed;
+			result -= GlobalVar.Instance.PLAYER_SPEED;
 		}
 		return result;
 	}
